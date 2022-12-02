@@ -13,7 +13,7 @@ elves.add(0)
 }
 
 // Sort the elves, lowest calories in index 0.
-elves.sort()
+elves.sortFast()
 
 // Part 1: Find the elf with the most calories.
 System.print("Part 1: " + elves[-1])
