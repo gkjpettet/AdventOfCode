@@ -1,0 +1,21 @@
+// Read each line from the data file.
+var lines = File("/Users/garry/Desktop/aoc1.txt").readlines
+
+// Each entry in elves is an individual elf's running total
+var elves = [0]
+foreach line in lines {
+if line.count > 0 {
+elves[-1] = elves[-1] + Number.fromString(line)
+} else {
+// New elf
+elves.add(0)
+}
+}
+
+// Find the elf with the most calories.
+var result = 0
+foreach elf in elves {
+result = elf > result ? elf : result
+}
+
+System.print(result)
