@@ -12,10 +12,12 @@ elves.add(0)
 }
 }
 
-// Find the elf with the most calories.
-var result = 0
-foreach elf in elves {
-result = elf > result ? elf : result
-}
+// Sort the elves, lowest calories in index 0.
+elves.sort()
 
-System.print(result)
+// Part 1: Find the elf with the most calories.
+System.print("Part 1: " + elves[-1])
+
+// Part 2: Sum of the three highest calorie elves.
+var sum = elves[-1] + elves[-2] + elves[-3]
+System.print("Part 2: " + sum)
