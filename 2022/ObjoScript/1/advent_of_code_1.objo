@@ -1,5 +1,5 @@
 // Read each line from the data file.
-var lines = File("/Users/garry/Desktop/aoc1.txt").readlines
+var lines = FSItem("/Users/garry/Desktop/aoc1.txt").readlines
 
 // Each entry in elves is an individual elf's running total
 var elves = [0]
