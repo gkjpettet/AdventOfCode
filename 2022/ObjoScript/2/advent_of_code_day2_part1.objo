@@ -1,0 +1,64 @@
+/// Returns the points value of the result of a round.
+function result(round) {
+var opponent = round.key
+var you = round.value
+var win = 6
+var draw = 3
+var lose = 0
+if you == "rock" {
+if opponent == "rock" then return draw
+if opponent == "paper" then return lose
+return win
+} else if you == "paper" {
+if opponent == "rock" then return win
+if opponent == "paper" then return draw
+return lose
+} else { // You picked scissors.
+if opponent == "rock" then return lose
+if opponent == "paper" then return win
+return draw
+}
+}
+
+/// Returns the score for a particular choice.
+function scoreForChoice(choice) {
+if choice == "rock" then return 1
+if choice == "paper" then return 2
+return 3 // Scissors.
+}
+
+// Get the input strategy.
+var lines = FSItem("/Users/garry/Desktop/aoc2.txt").readLines
+
+// Split the input into rounds of them : you, transmuting
+// the cryptic letters into meaningful words.
+var rounds = []
+foreach line in lines {
+var tmp = line.split(" ")
+if tmp[0] == "A" {
+tmp[0] = "rock"
+} else if tmp[0] == "B" {
+tmp[0] = "paper"
+} else {
+tmp[0] = "scissors"
+}
+if tmp[1] == "X" {
+tmp[1] = "rock"
+} else if tmp[1] == "Y" {
+tmp[1] = "paper"
+} else {
+tmp[1] = "scissors"
+}
+rounds.add(tmp[0] : tmp[1])
+}
+
+var score = 0
+foreach round in rounds {
+// Win, lose or draw?
+score = score + result(round)
+
+// What did you pick?
+score = score + scoreForChoice(round.value)
+}
+
+System.print(score) // Expect 14069.

@@ -1,0 +1,80 @@
+/// Returns the points value of the result of a round.
+function result(round) {
+var opponent = round.key
+var you = round.value
+var win = 6
+var draw = 3
+var lose = 0
+if you == "rock" {
+if opponent == "rock" then return draw
+if opponent == "paper" then return lose
+return win
+} else if you == "paper" {
+if opponent == "rock" then return win
+if opponent == "paper" then return draw
+return lose
+} else { // You picked scissors.
+if opponent == "rock" then return lose
+if opponent == "paper" then return win
+return draw
+}
+}
+
+/// Returns the score for a particular choice.
+function scoreForChoice(choice) {
+if choice == "rock" then return 1
+if choice == "paper" then return 2
+return 3 // Scissors.
+}
+
+// Get the input strategy.
+var lines = FSItem("/Users/garry/Desktop/aoc2.txt").readLines
+
+var cypher = {
+("rock" : "X") : "scissors", 
+("rock" : "Y") : "rock", 
+("rock" : "Z") : "paper", 
+("paper" : "X") : "rock", 
+("paper" : "Y") : "paper", 
+("paper" : "Z") : "scissors", 
+("scissors" : "X") : "paper", 
+("scissors" : "Y") : "scissors", 
+("scissors" : "Z") : "rock"
+}
+
+// Split the input into rounds of them : you, transmuting
+// the cryptic letters into meaningful words.
+var rounds = []
+foreach line in lines {
+var tmp = line.split(" ")
+if tmp[0] == "A" and tmp[1] == "X" {
+rounds.add("rock" : "scissors")
+} else if tmp[0] == "A" and tmp[1] == "Y" {
+rounds.add("rock" : "rock")
+} else if tmp[0] == "A" and tmp[1] == "Z" {
+rounds.add("rock" : "paper")
+} else if tmp[0] == "B" and tmp[1] == "X" {
+rounds.add("paper" : "rock")
+} else if tmp[0] == "B" and tmp[1] == "Y" {
+rounds.add("paper" : "paper")
+} else if tmp[0] == "B" and tmp[1] == "Z" {
+rounds.add("paper" : "scissors")
+} else if tmp[0] == "C" and tmp[1] == "X" {
+rounds.add("scissors" : "paper")
+} else if tmp[0] == "C" and tmp[1] == "Y" {
+rounds.add("scissors" : "scissors")
+} else if tmp[0] == "C" and tmp[1] == "Z" {
+rounds.add("scissors": "rock")
+}
+}
+
+var score = 0
+foreach round in rounds {
+// Win, lose or draw?
+score = score + result(round)
+
+// What did you pick?
+score = score + scoreForChoice(round.value)
+}
+
+System.print(score) // Expect 12411.
