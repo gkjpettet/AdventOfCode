@@ -71,10 +71,10 @@ rounds.add("scissors": "rock")
 var score = 0
 foreach round in rounds {
 // Win, lose or draw?
-score = score + result(round)
+score += result(round)
 
 // What did you pick?
-score = score + scoreForChoice(round.value)
+score += scoreForChoice(round.value)
 }
 
 System.print(score) // Expect 12411.
